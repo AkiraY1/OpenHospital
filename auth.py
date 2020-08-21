@@ -5,3 +5,7 @@ import sqlite3
 from models import User
 
 auth = Blueprint('auth', __name__)
+
+@auth.route('/')
+def welcome():
+    return "Hello there"
