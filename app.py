@@ -23,9 +23,9 @@ def create_app():
         if id == good_id:
             u = cur.execute('SELECT * from users WHERE id = (?)', [id])
             info = u.fetchone()
-            return User(info[0], info[1], info[2], info[3], info[4], info[5]) # gotta fix this soon
+            return User(info[0], info[1], info[2], info[3], info[4], info[5], info[6], info[7], info[8], info[9], info[10], info[11], info[12], info[13])
         else:
-            print("Failed for some reason")
+            print("Failed for some reason (or just not logged in)")
             return None
     
     from auth import auth as auth_blueprint

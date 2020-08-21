@@ -1,18 +1,26 @@
 {% extends "base.html " %}
 
 {% block content %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div>
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+    {% endwith %}
     <div>
-        <form>
+        <form method='POST'>
             <input type="text" placeholder="Name" name="name">
             <input type="email" placeholder="Email" name="email">
             <input type="password" placeholder="Password" name="password">
             <input list="role" name="role">
-            <datalist id="role">
+            <datalist id="role" aria-placeholder="Choose Role">
                 <option value="Doctor">
                 <option value="Nurse">
                 <option value="Patient">
             </datalist>
             <input type="text" placeholder="Practice Name" name="practice">
+            <button type="submit">Submit</button>
         </form>
     </div>
 {% endblock %}

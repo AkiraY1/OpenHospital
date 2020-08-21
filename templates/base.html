@@ -15,7 +15,7 @@
                 <li class="active"><a href="{{url_for('dash.dashboard')}}"> <i class="fa fa-user " aria-hidden="true"></i>Dashboard</a> </li>
                 <li class="active"> <a href="#"><i class="fa fa-clipboard " aria-hidden="true"></i>Logout</a> </li>
                 {% else %}
-                <li class="active"> <a href="{{url_for('auth.login')}"><i class="fa fa-clipboard " aria-hidden="true"></i>Login</a> </li>
+                <li class="active"> <a href="{{url_for('auth.login')}}"><i class="fa fa-clipboard " aria-hidden="true"></i>Login</a> </li>
                 <li class="active"> <a href="{{url_for('auth.signup')}}"><i class="fa fa-clipboard " aria-hidden="true"></i>Signup</a> </li>
                 {% endif %}
             </ul>
