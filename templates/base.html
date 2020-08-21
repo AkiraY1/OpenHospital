@@ -3,8 +3,15 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <link rel="stylesheet" href="menu.css">
+        <link rel="stylesheet" href="OpenHospital/static/menu.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script>
+            // When the user clicks on <div>, open the popup
+            function myFunction() {
+              var popup = document.getElementById("myPopup");
+              popup.classList.toggle("show");
+            }
+        </script>
     </head>
 
     <body>
@@ -13,11 +20,13 @@
                 <li class="active"><a href="{{url_for('auth.welcome')}}"> <i class="fa fa-user-md" aria-hidden="true"></i>Welcome</a></li>
                 {% if current_user.is_authenticated %}
                 <li class="active"><a href="{{url_for('dashboard.dashboard')}}"> <i class="fa fa-user " aria-hidden="true"></i>Dashboard</a> </li>
-                <li class="active"><a href="{{url_for('ps.profile')}}"> <i class="fa fa-user " aria-hidden="true"></i>Profile</a> </li>
                 <li class="active"> <a href="{{url_for('auth.logout')}}"><i class="fa fa-clipboard " aria-hidden="true"></i>Logout</a> </li>
                 {% else %}
                 <li class="active"> <a href="{{url_for('auth.login')}}"><i class="fa fa-clipboard " aria-hidden="true"></i>Login</a> </li>
                 <li class="active"> <a href="{{url_for('auth.signup')}}"><i class="fa fa-clipboard " aria-hidden="true"></i>Signup</a> </li>
+                {% endif %}
+                {% if current_user.role == 'Patient' %}
+                <li class="active"> <a href="{{url_for('ps.profile')}}"><i class="fa fa-clipboard " aria-hidden="true"></i>Profile</a> </li>
                 {% endif %}
             </ul>
         </div>

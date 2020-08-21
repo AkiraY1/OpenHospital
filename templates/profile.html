@@ -1,26 +1,34 @@
 {% extends "base.html " %}
 
 {% block content %}
-    {% if (current_user.role == 'Doctor') or (current_user.role == 'Nurse') %}
-        <div>
-            Name: {{current_user.name}}
-            Email: {{current_user.email}}
-            Role: {{current_user.role}}
-            Practice Name: {{current_user.practice}}
-        </div>
-    {% endif %}
-    {% if current_user.role == 'Patient' %}
-        <div>
-            Name: {{current_user.name}}
-            Email: {{current_user.email}}
-            Role: {{current_user.role}}
-            Address: {{current_user.address}}
-            Gender: {{current_user.gender}}
-            Ethnicity: {{current_user.ethnicity}}
-            Age: {{current_user.age}}
-            Birthdate: {{current_user.birthdate}}
-            Occupation: {{current_user.occupation}}
-            History: {{current_user.history}}
-        </div>
-    {% endif %}
+    <div>
+        Name: {{current_user.name}}
+        Email: {{current_user.email}}
+        Role: {{current_user.role}}
+        Address: {{current_user.address}}
+        Gender: {{current_user.gender}}
+        Ethnicity: {{current_user.ethnicity}}
+        Age: {{current_user.age}}
+        Birthdate: {{current_user.birthdate}}
+        Occupation: {{current_user.occupation}}
+        History: {{current_user.history}}
+    </div>
+    <br>
+        <form method='POST'>
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder={{current_user.name}} name="name">
+            <label for="name">Address</label>
+            <input id="name" type="text" placeholder={{current_user.address}} name="address">
+            <label for="name">Gender</label>
+            <input id="name" type="text" placeholder={{current_user.gender}} name="gender">
+            <label for="name">Ethnicity</label>
+            <input id="name" type="text" placeholder={{current_user.ethnicity}} name="ethnicity">
+            <label for="name">Age</label>
+            <input id="name" type="text" placeholder={{current_user.age}} name="age">
+            <label for="name">Birthdate</label>
+            <input id="name" type="text" placeholder={{current_user.birthdate}} name="birthdate">
+            <label for="name">Occupation</label>
+            <input id="name" type="text" placeholder={{current_user.occupation}} name="occupation">
+            <button type="submit"> Make Changes</button>
+        </form>
 {% endblock %}
