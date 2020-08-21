@@ -7,4 +7,9 @@ import random
 from werkzeug.security import generate_password_hash
 from werkzeug.utils import secure_filename
 
-dashboard = Blueprint('dashboard', __name__)
+dash = Blueprint('dashboard', __name__)
+
+@dash.route('/dashboard')
+@login_required
+def dashboard():
+    return "Logged in successfully"

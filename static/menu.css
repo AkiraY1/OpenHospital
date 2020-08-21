@@ -7,7 +7,7 @@
 /*makes sure no alteration of pure letter shape and size*/
 
 body{
-    background-image: url(picture);
+    background-color: white;
     background-size: cover;
     font-family: sans-serif;
 }
@@ -15,7 +15,7 @@ body{
 /*centers image, don't add centering for best results*/
 
 .menu-bar{
-    background: color;
+    background: darkcyan;
     text-align: center;
 
 }
@@ -25,6 +25,71 @@ body{
 .menu-bar ul{
     display: inline-flex;
     list-style:none;
-    color: color;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 23px;
+}
 
+/*font-family: Copperplate, "Copperplate Gothic Light", fantasy; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; */
+
+.menu-bar ul li{
+    width: 120px;
+    margin: 10px;
+    padding: 15px;
+    border-left: 200px;
+    border-right: 200px;
+}
+
+.menu-bar ul li a{
+    text-decoration: none;
+    color: white;
+    font-family: 'Monsterrat';
+
+}
+
+.active:hover{
+    background: salmon;
+    border-radius: 20px;
+}
+
+.menu-bar , .sub-menu-1, .fa{
+    text-align: left;
+    margin-left: 8px;
+}
+
+.sub-menu-1{
+    display: none;
+    float: left;
+}
+
+.menu-bar ul li:hover .sub-menu-1{
+    display: block;
+    position: absolute;
+    background: skyblue;
+    margin-top: 15px;
+    margin-left:-15px;
+    border-radius: 20px;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul{
+    display: block;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li{
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px dotted white;
+    border-radius: 0px;
+    background: transparent;
+    text-align: left;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child{
+border-bottom:none;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover{
+    color: lightseagreen;
 }

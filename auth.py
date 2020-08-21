@@ -51,4 +51,24 @@ def login():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login_post():
-    return "Login-post"
+    conn = sqlite3.connect('users.db')
+    cur = conn.cursor()
+
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    if (email == None) or (password == None):
+        flash("Please fill every field")
+        return redirect(url_for('auth.signup'))
+
+    user_info = cur.execute(f"SELECT * FROM users WHERE email = '{email}';")
+    user_info_fetched = user_info.fetchone()
+
+    if user_info_fetched[0] == None:
+        flash("This email is not signed up yet")
+        return redirect(url_for('auth.login'))
+    
+    if check_password_hash(user_info_fetched[3], password):
+        user = User(user_info_fetched[0], user_info_fetched[1], user_info_fetched[2], user_info_fetched[3], user_info_fetched[4], user_info_fetched[5], user_info_fetched[6], user_info_fetched[7], user_info_fetched[8], user_info_fetched[9], user_info_fetched[10], user_info_fetched[11], user_info_fetched[12], user_info_fetched[13])
+        login_user(user)
+        return redirect(url_for('auth.welcome'))

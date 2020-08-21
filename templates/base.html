@@ -12,7 +12,7 @@
             <ul>
                 <li class="active"><a href="{{url_for('auth.welcome')}}"> <i class="fa fa-user-md" aria-hidden="true"></i>Welcome</a></li>
                 {% if current_user.is_authenticated %}
-                <li class="active"><a href="{{url_for('dash.dashboard')}}"> <i class="fa fa-user " aria-hidden="true"></i>Dashboard</a> </li>
+                <li class="active"><a href="{{url_for('dashboard.dashboard')}}"> <i class="fa fa-user " aria-hidden="true"></i>Dashboard</a> </li>
                 <li class="active"> <a href="#"><i class="fa fa-clipboard " aria-hidden="true"></i>Logout</a> </li>
                 {% else %}
                 <li class="active"> <a href="{{url_for('auth.login')}}"><i class="fa fa-clipboard " aria-hidden="true"></i>Login</a> </li>
