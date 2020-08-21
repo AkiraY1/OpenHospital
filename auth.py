@@ -43,7 +43,7 @@ def signup_post():
         user_id = idy.fetchone()
         new_user = User(user_id, email, name, password, role, practice, None, None, None, None, None, None, None, None)
         login_user(new_user)
-        return redirect(url_for('auth.welcome'))
+        return redirect(url_for('dashboard.dashboard'))
 
 @auth.route('/login')
 def login():
@@ -71,4 +71,10 @@ def login_post():
     if check_password_hash(user_info_fetched[3], password):
         user = User(user_info_fetched[0], user_info_fetched[1], user_info_fetched[2], user_info_fetched[3], user_info_fetched[4], user_info_fetched[5], user_info_fetched[6], user_info_fetched[7], user_info_fetched[8], user_info_fetched[9], user_info_fetched[10], user_info_fetched[11], user_info_fetched[12], user_info_fetched[13])
         login_user(user)
-        return redirect(url_for('auth.welcome'))
+        return redirect(url_for('dashboard.dashboard'))
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('auth.welcome'))

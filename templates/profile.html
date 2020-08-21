@@ -1,0 +1,26 @@
+{% extends "base.html " %}
+
+{% block content %}
+    {% if (current_user.role == 'Doctor') or (current_user.role == 'Nurse') %}
+        <div>
+            Name: {{current_user.name}}
+            Email: {{current_user.email}}
+            Role: {{current_user.role}}
+            Practice Name: {{current_user.practice}}
+        </div>
+    {% endif %}
+    {% if current_user.role == 'Patient' %}
+        <div>
+            Name: {{current_user.name}}
+            Email: {{current_user.email}}
+            Role: {{current_user.role}}
+            Address: {{current_user.address}}
+            Gender: {{current_user.gender}}
+            Ethnicity: {{current_user.ethnicity}}
+            Age: {{current_user.age}}
+            Birthdate: {{current_user.birthdate}}
+            Occupation: {{current_user.occupation}}
+            History: {{current_user.history}}
+        </div>
+    {% endif %}
+{% endblock %}
