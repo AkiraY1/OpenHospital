@@ -1,0 +1,18 @@
+{% extends "base.html " %}
+
+{% block content %}
+    <div>
+        <form>
+            <input type="text" placeholder="Name" name="name">
+            <input type="email" placeholder="Email" name="email">
+            <input type="password" placeholder="Password" name="password">
+            <input list="role" name="role">
+            <datalist id="role">
+                <option value="Doctor">
+                <option value="Nurse">
+                <option value="Patient">
+            </datalist>
+            <input type="text" placeholder="Practice Name" name="practice">
+        </form>
+    </div>
+{% endblock %}
