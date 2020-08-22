@@ -12,4 +12,14 @@ dash = Blueprint('dashboard', __name__)
 @dash.route('/dashboard')
 @login_required
 def dashboard():
+    if current_user.role == 'Patient':
+        return redirect(url_for('dashboard.dashboard_patient'))
+    return render_template('dashboard.html')
+
+
+@dash.route('/dashboard-patient')
+@login_required
+def dashboard_patient():
+    if current_user.role != 'Patient':
+        return redirect(url_for('dashboard.dashboard'))
     return "Logged in successfully"
