@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
-{% block content %}
+    {% block content %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div>
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}    
+
     <form method="POST" action="/dashboard/add-patient">
         <button type="submit" name="add_patient" value="Add_Patient"> Add Patient </button>
     </form>
@@ -15,7 +23,7 @@
             {% if patient[1] == None %}
             <li> Unconfirmed </li>
             {% else %}
-            <li>{{patient[1]}}</li>
+            <li><a href="{{url_for('dashboard.dashboard_view_patient', token=patient[0])}}">{{patient[1]}}</a></li>
             {% endif %}
             <li>{{patient[0]}}</li>
         {% endfor %}

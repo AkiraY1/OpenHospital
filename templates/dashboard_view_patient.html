@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+    {% block content %}
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div>
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}    
+
+        <h2>Notifications</h2>
+        <h2>Appointments</h2>
+        <h3>Scheduled Appointments</h3>
+        {% if appointments[0] != None %}
+        <table>
+            {% for inst in appointments[0] %}
+            <tr>
+                <td> {{inst[0]}}</td>
+                <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("dashboard.accept_ra", content=inst)}}'>Accept</a></td>
+                <td><a href='{{url_for("dashboard.delete_ra", content=inst)}}'>Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <h3>Requested Appointments</h3>
+        {% if appointments[1] != None %}
+        <table>
+            {% for inst in appointments[1] %}
+            <tr>
+                <td> {{inst[0]}}</td>
+                <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <h2>Current Treatments</h2>
+        {% if current_treatments != None %}
+        <table>
+            {% for inst in current_treatments %}
+            <tr>
+                <td> {{inst[0]}}</td>
+                <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <h2>Current Diagnosis</h2>
+        {% if diagnosis != None %}
+        <table>
+            {% for inst in diagnosis %}
+            <tr>
+                <td> {{inst[0]}}</td>
+                <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <h2>Current Symptoms</h2>
+        {% if symptoms != [] %}
+        <table>
+            {% for inst in symptoms %}
+            <tr>
+                <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <h2>Patient Profile</h2>
+        <p>Not doing this because its just variables</p>
+        <h2>Patient History</h2>
+        <h3> Diseases</3>
+        {% if diseases != [] %}
+        <table>
+            <tr>
+                <td> Date </td>
+                <td> Disease</td>
+            </tr>
+            {% for inst in diseases %}
+            <tr>
+                <td> {{inst[0]}}</td>
+                <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <h3> Treatments</h3>
+        {% if treatments != [] %}
+        <table>
+            <tr>
+                <td> Date </td>
+                <td> Treatment</td>
+            </tr>
+            {% for inst in treatments %}
+            <tr>
+                <td> {{inst[0]}} </td>
+                <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_t", t=inst[1])}}'>X</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </ul>
+{% endblock %}
