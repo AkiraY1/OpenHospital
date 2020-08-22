@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Symptom Tracker</h1>
+    <h2> Symptoms</h2>
+    {% if symptoms != [] %}
+    <table>
+        {% for inst in symptoms %}
+        <tr>
+            <td> {{inst[1]}}</td>
+            <td><a href='{{url_for("ps.delete_s", s=inst[1])}}'>X</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <br>
+    <form method="POST">
+        <input list="brow" name='symptom'>
+        <datalist id="brow">
+            {% for problemo in PROBLEMS %}
+            <option value="{{problemo['Name']}}">
+            {% endfor %}
+        </datalist>
+        <button type="submit" name='sub' value='sy'> Add</button>
+    </form>
+    <br>
+    <h1>Possible Diagnoses</h1>
+{% endblock %}

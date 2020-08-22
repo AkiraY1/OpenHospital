@@ -39,11 +39,12 @@ def signup_post():
     else:
         treatments = []
         diseases = []
-        cur.execute(f"INSERT INTO users(email, name, password, role, practice, treatments, diseases) VALUES('{email}','{name}','{generate_password_hash(password, method='sha256')}','{role}','{practice}','{treatments}','{diseases}');")
+        symptoms = []
+        cur.execute(f"INSERT INTO users(email, name, password, role, practice, treatments, diseases, symptoms) VALUES('{email}','{name}','{generate_password_hash(password, method='sha256')}','{role}','{practice}','{treatments}','{diseases}','{symptoms}');")
         conn.commit()
         idy = cur.execute(f"SELECT id FROM users WHERE email = '{email}';")
         user_id = idy.fetchone()
-        new_user = User(user_id, email, name, password, role, practice, None, None, None, None, None, None, None, None, treatments, diseases)
+        new_user = User(user_id, email, name, password, role, practice, None, None, None, None, None, None, symptoms, None, treatments, diseases)
         login_user(new_user)
         print("Logged in")
         return redirect(url_for('dashboard.dashboard'))
