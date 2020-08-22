@@ -27,6 +27,7 @@ def profile():
         list_diseases.sort(reverse=True, key=lambda x: x[0])
     else:
         list_diseases = None
+    print(list_diseases)
 
     if request.method == 'POST':
         #import pdb
@@ -53,20 +54,98 @@ def profile():
 @login_required
 def profile_add_disease():
     if request.method == 'POST':
-        print("This one occured")
         treatment = request.form.get('disease')
         date = request.form.get('date')
-        print(treatment)
-        print(date)
+        d = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+
+        user_id = current_user.id
+        #Get current treatments list
+        treatments = ''.join(elem for elem in current_user.treatments)
+        list_treatments = eval(treatments)
+        list_treatments.sort(reverse=True, key=lambda x: x[0])
+        #Add date and name to list
+        list_treatments.insert(0, (d, treatment))
+        print(list_treatments)
+        #Insert new list into table
+        conn = sqlite3.connect('users.db')
+        cur = conn.cursor()
+        cur.execute(f'UPDATE users SET diseases = "{list_treatments}" WHERE id = "{current_user.id}";')
+        conn.commit()
+        current_user.diseases = list_treatments
     return redirect(url_for('ps.profile'))
 
 @ps.route('/profile/add-treatment', methods=['POST', 'GET'])
 @login_required
 def profile_add_treatment():
     if request.method == 'POST':
-        print("This one occured")
         treatment = request.form.get('treatment')
         date = request.form.get('date')
-        print(treatment)
-        print(date)
+        d = datetime.datetime.strptime(date, '%Y-%m-%d').date()
+
+        user_id = current_user.id
+        #Get current treatments list
+        treatments = ''.join(elem for elem in current_user.treatments)
+        list_treatments = eval(treatments)
+        list_treatments.sort(reverse=True, key=lambda x: x[0])
+        #Add date and name to list
+        list_treatments.insert(0, (d, treatment))
+        print(list_treatments)
+        #Insert new list into table
+        conn = sqlite3.connect('users.db')
+        cur = conn.cursor()
+        cur.execute(f'UPDATE users SET treatments = "{list_treatments}" WHERE id = "{current_user.id}";')
+        conn.commit()
+        current_user.treatments = list_treatments
+    return redirect(url_for('ps.profile'))
+
+@ps.route('/profile/delete-d/<string:d>', methods=['GET', 'POST'])
+@login_required
+def delete_d(d):
+    conn = sqlite3.connect('users.db')
+    cur = conn.cursor()
+
+    #Find list and fix
+    diseases = ''.join(elem for elem in current_user.diseases)
+    list_diseases = eval(diseases)
+    list_diseases.sort(reverse=True, key=lambda x: x[0])
+    
+    #Find item in list and its index
+    for tuples in list_diseases:
+        if d in tuples:
+            index = list_diseases.index(tuples)
+    
+    #Remove tuple from list
+    list_diseases.pop(index)
+
+    #Updating table and current_user
+    cur.execute(f'UPDATE users SET diseases = "{list_diseases}" WHERE id = "{current_user.id}";')
+    conn.commit()
+    current_user.diseases = list_diseases
+
+    return redirect(url_for('ps.profile'))
+
+@ps.route('/profile/delete-t/<string:t>', methods=['GET', 'POST'])
+@login_required
+def delete_t(t):
+    conn = sqlite3.connect('users.db')
+    cur = conn.cursor()
+
+    #Find list and fix
+    treatments = ''.join(elem for elem in current_user.treatments)
+    list_treatments = eval(treatments)
+    list_treatments.sort(reverse=True, key=lambda x: x[0])
+    
+    #Find item in list and its index
+    for tuples in list_treatments:
+        if t in tuples:
+            index = list_treatments.index(tuples)
+    
+    #Remove tuple from list
+    list_treatments.pop(index)
+
+    #Updating table and current_user
+    cur.execute(f'UPDATE users SET treatments = "{list_treatments}" WHERE id = "{current_user.id}";')
+    conn.commit()
+    current_user.treatments = list_treatments
+
     return redirect(url_for('ps.profile'))

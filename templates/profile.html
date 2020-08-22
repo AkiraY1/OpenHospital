@@ -41,8 +41,9 @@
             </tr>
             {% for inst in diseases %}
             <tr>
-                <td> {{inst[0]}} </td>
+                <td> {{inst[0]}}</td>
                 <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
             </tr>
             {% endfor %}
         </table>
@@ -58,6 +59,7 @@
             <tr>
                 <td> {{inst[0]}} </td>
                 <td> {{inst[1]}}</td>
+                <td><a href='{{url_for("ps.delete_t", t=inst[1])}}'>X</a></td>
             </tr>
             {% endfor %}
         </table>
