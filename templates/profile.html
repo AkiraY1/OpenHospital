@@ -11,24 +11,72 @@
         Age: {{current_user.age}}
         Birthdate: {{current_user.birthdate}}
         Occupation: {{current_user.occupation}}
-        History: {{current_user.history}}
     </div>
     <br>
-        <form method='POST'>
-            <label for="name">Name</label>
-            <input id="name" type="text" placeholder={{current_user.name}} name="name">
-            <label for="name">Address</label>
-            <input id="name" type="text" placeholder={{current_user.address}} name="address">
-            <label for="name">Gender</label>
-            <input id="name" type="text" placeholder={{current_user.gender}} name="gender">
-            <label for="name">Ethnicity</label>
-            <input id="name" type="text" placeholder={{current_user.ethnicity}} name="ethnicity">
-            <label for="name">Age</label>
-            <input id="name" type="text" placeholder={{current_user.age}} name="age">
-            <label for="name">Birthdate</label>
-            <input id="name" type="text" placeholder={{current_user.birthdate}} name="birthdate">
-            <label for="name">Occupation</label>
-            <input id="name" type="text" placeholder={{current_user.occupation}} name="occupation">
-            <button type="submit"> Make Changes</button>
-        </form>
+    <form method='POST' action="/profile">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder={{current_user.name}} name="name">
+        <label for="name">Address</label>
+        <input id="name" type="text" placeholder={{current_user.address}} name="address">
+        <label for="name">Gender</label>
+        <input id="name" type="text" placeholder={{current_user.gender}} name="gender">
+        <label for="name">Ethnicity</label>
+        <input id="name" type="text" placeholder={{current_user.ethnicity}} name="ethnicity">
+        <label for="name">Age</label>
+        <input id="name" type="text" placeholder={{current_user.age}} name="age">
+        <label for="name">Birthdate</label>
+        <input id="name" type="text" placeholder={{current_user.birthdate}} name="birthdate">
+        <label for="name">Occupation</label>
+        <input id="name" type="text" placeholder={{current_user.occupation}} name="occupation">
+        <button type="submit" name='sub' value="profile"> Make Changes</button>
+    </form>
+    <div>
+        <h1>Medical History:</h1>
+        <h2> Diseases</h2>
+        {% if diseases != [] %}
+        <table>
+            <tr>
+                <td> Date </td>
+                <td> Disease</td>
+            </tr>
+            {% for inst in diseases %}
+            <tr>
+                <td> {{inst[0]}} </td>
+                <td> {{inst[1]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        <h2> Treatments</h2>
+        {% if treatments != [] %}
+        <table>
+            <tr>
+                <td> Date </td>
+                <td> Treatment</td>
+            </tr>
+            {% for inst in treatments %}
+            <tr>
+                <td> {{inst[0]}} </td>
+                <td> {{inst[1]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    <br>
+    <form method='POST' action="/profile/add-disease">
+        <label for="name">Disease/Condition</label>
+        <input id="name" type="text" name="disease">
+        <label for="name">Date</label>
+        <input id="name" type="date" name="date">
+        <button type="submit" name='dis' value="dis"> Add Changes</button>
+    </form>
+    <br>
+    <form method='POST' action="/profile/add-treatment">
+        <label for="name">Treatment</label>
+        <input id="name" type="text" name="treatment">
+        <label for="name">Date</label>
+        <input id="name" type="date" name="date">
+        <button type="submit" name='tr' value="tr"> Add Changes</button>
+    </form>
 {% endblock %}

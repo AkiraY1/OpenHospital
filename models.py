@@ -1,5 +1,5 @@
 class User():
-    def __init__(self,user_id,email,name,password, role, practice, address, gender, ethnicity, age, birthdate, occupation, symptoms, history):
+    def __init__(self,user_id,email,name,password, role, practice, address, gender, ethnicity, age, birthdate, occupation, symptoms, history, treatments, diseases):
         self.id = user_id
         self.email = email
         self.name = name
@@ -14,6 +14,8 @@ class User():
         self.occupation = occupation
         self.symptoms = symptoms
         self.history = history
+        self.treatments = treatments
+        self.diseases = diseases
         self.active = True
 
     def is_authenticated(self):

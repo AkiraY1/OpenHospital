@@ -25,7 +25,7 @@ def signup_post():
     role = request.form.get('role')
     practice = request.form.get('practice')
 
-    if (email == None) or (password == None) or (practice == None) or (name == None) or (role == None):
+    if (email == None) or (password == None) or (practice == None) or (name == None) or (role == None): #Fix so only need practice if doctor
         flash("Please fill every field")
         return redirect(url_for('auth.signup'))
 
@@ -37,12 +37,15 @@ def signup_post():
         return redirect(url_for('auth.signup'))
 
     else:
-        cur.execute(f"INSERT INTO users(email, name, password, role, practice) VALUES('{email}','{name}','{generate_password_hash(password, method='sha256')}','{role}','{practice}');")
+        treatments = []
+        diseases = []
+        cur.execute(f"INSERT INTO users(email, name, password, role, practice, treatments, diseases) VALUES('{email}','{name}','{generate_password_hash(password, method='sha256')}','{role}','{practice}','{treatments}','{diseases}');")
         conn.commit()
         idy = cur.execute(f"SELECT id FROM users WHERE email = '{email}';")
         user_id = idy.fetchone()
-        new_user = User(user_id, email, name, password, role, practice, None, None, None, None, None, None, None, None)
+        new_user = User(user_id, email, name, password, role, practice, None, None, None, None, None, None, None, None, treatments, diseases)
         login_user(new_user)
+        print("Logged in")
         return redirect(url_for('dashboard.dashboard'))
 
 @auth.route('/login')
@@ -69,7 +72,7 @@ def login_post():
         return redirect(url_for('auth.login'))
     
     if check_password_hash(user_info_fetched[3], password):
-        user = User(user_info_fetched[0], user_info_fetched[1], user_info_fetched[2], user_info_fetched[3], user_info_fetched[4], user_info_fetched[5], user_info_fetched[6], user_info_fetched[7], user_info_fetched[8], user_info_fetched[9], user_info_fetched[10], user_info_fetched[11], user_info_fetched[12], user_info_fetched[13])
+        user = User(user_info_fetched[0], user_info_fetched[1], user_info_fetched[2], user_info_fetched[3], user_info_fetched[4], user_info_fetched[5], user_info_fetched[6], user_info_fetched[7], user_info_fetched[8], user_info_fetched[9], user_info_fetched[10], user_info_fetched[11], user_info_fetched[12], user_info_fetched[13], user_info_fetched[14])
         login_user(user)
         return redirect(url_for('dashboard.dashboard'))
 
