@@ -48,6 +48,7 @@ def signup_post():
         login_user(new_user)
         print("Logged in")
         return redirect(url_for('dashboard.dashboard'))
+    return redirect(url_for('auth.login'))
 
 @auth.route('/login')
 def login():
@@ -73,9 +74,10 @@ def login_post():
         return redirect(url_for('auth.login'))
     
     if check_password_hash(user_info_fetched[3], password):
-        user = User(user_info_fetched[0], user_info_fetched[1], user_info_fetched[2], user_info_fetched[3], user_info_fetched[4], user_info_fetched[5], user_info_fetched[6], user_info_fetched[7], user_info_fetched[8], user_info_fetched[9], user_info_fetched[10], user_info_fetched[11], user_info_fetched[12], user_info_fetched[13], user_info_fetched[14])
+        user = User(user_info_fetched[0], user_info_fetched[1], user_info_fetched[2], user_info_fetched[3], user_info_fetched[4], user_info_fetched[5], user_info_fetched[6], user_info_fetched[7], user_info_fetched[8], user_info_fetched[9], user_info_fetched[10], user_info_fetched[11], user_info_fetched[12], user_info_fetched[13], user_info_fetched[14], user_info_fetched[15])
         login_user(user)
         return redirect(url_for('dashboard.dashboard'))
+    return redirect(url_for('auth.login'))
 
 @auth.route('/logout')
 @login_required

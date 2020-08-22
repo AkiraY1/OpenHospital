@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form>
-        
+    <form method="POST" action="/dashboard/add-patient">
+        <button type="submit" name="add_patient" value="Add_Patient"> Add Patient </button>
     </form>
+    <br>
+    <form method="POST" action="/dashboard/join-patient">
+        <input type="text" name="access_token" placeholder="Token">
+        <button type="submit" name="join_patient">Add patient that already exists</button>
+    </form>
+    <br>
+    <ul>
+        {% for patient in tokens_list %}
+            {% if patient[1] == None %}
+            <li> Unconfirmed </li>
+            {% else %}
+            <li>{{patient[1]}}</li>
+            {% endif %}
+            <li>{{patient[0]}}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
