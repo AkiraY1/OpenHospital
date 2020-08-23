@@ -1,0 +1,347 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    background-size: cover;
+}
+
+.menu-bar {
+    background: rgb(0, 0, 40);
+    height: 60px;
+}
+
+.menu-bar ul {
+    display: inline-flex;
+    list-style: none;
+    color: cornflowerblue;
+    float: right;
+    text-align: center;
+}
+
+.menu-bar ul li {
+    width: 120px;
+    margin: 10px;
+    padding: 15px;
+    border-left: 200px;
+    border-right: 200px;
+}
+
+.menu-bar ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.active:hover,
+.menu-bar ul li a :hover {
+    background: skyblue;
+    border-radius: 20px
+}
+
+.menu-bar .fa {
+    margin-right: 8px;
+}
+
+.sub-menu-1 {
+    display: none;
+}
+
+.menu-bar ul li:hover .sub-menu-1 {
+    display: block;
+    position: absolute;
+    background: cornflowerblue;
+    margin-top: 15px;
+    margin-left: -15px;
+    border-radius: 20px;
+    z-index: 3;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul {
+    display: block;
+    margin: 10px;
+    border-radius: 20px;
+    z-index: 3;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li {
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px dotted color;
+    border-radius: 0px;
+    background: transparent;
+    text-align: left;
+    z-index: 3;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child {
+    border-bottom: none;
+    z-index: 3;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover {
+    color: rgb(0, 0, 40);
+    z-index: 3;
+}
+
+.title {
+    text-align: right;
+    display: inline-block;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    color: White;
+    padding: 5px;
+    padding-left: 5px;
+    margin-left: 5px;
+}
+
+.welcome1 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+.grid-item1 {
+    line-height: 40px;
+}
+
+.grid-item2 {
+    margin: 2vw;
+    grid-column: 2/5;
+    line-height: 40px;
+    border-radius: 0px;
+    font-size: 14px;
+    position: relative;
+    margin-left: 1.5%;
+    top: 42px;
+    font-family: 'Courier New', Courier, monospace
+}
+
+.grid-item3 {
+    margin: 2vw;
+    width: 80vw;
+    grid-column: 2/5;
+    line-height: 40px;
+}
+
+.grid-item4 {
+    margin: 2vw;
+    width: 24vw;
+}
+
+input[type=text] {
+    display: inline-block;
+    width: 48vw;
+    line-height: 32px;
+    font-size: 16px;
+}
+
+button[type=submit] {
+    display: inline-block;
+    width: 28vw;
+    line-height: 20px;
+    background-color: rgb(0, 0, 40);
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 5px;
+}
+
+.form-container {
+    background-color: white;
+    min-width: 815px;
+}
+
+.notifications {
+    margin: 10px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1vw;
+    top: -300px;
+    color: rgb(0, 0, 40);
+    background-color: rgb(210, 232, 252);
+    scroll-padding-block-end: 2px solid rgb(0, 0, 40);
+    border-radius: 20px;
+}
+
+.search {
+    width: 80vw;
+    line-height: 20px;
+    border: none;
+    border-radius: 2px;
+    margin-bottom: 20px;
+}
+
+.searchpat {
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    margin-left: -1%;
+    top: 20px;
+}
+
+.grid-item1 {
+    background-color: rgb(210, 232, 252);
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+}
+
+td,
+th {
+    border: none;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+th,
+td {
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.tableo,
+.new-table {
+    position: relative;
+    top: -500px;
+}
+
+.newtableo {
+    position: relative;
+    top: 70px;
+}
+
+.tableo {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+th,
+td {
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.sched {
+    font-family: 'Courier New', Courier, monospace;
+    position: relative;
+    top: 580px;
+    left: -2.5px;
+}
+
+.verde {
+    background-color: green;
+    padding: 5px;
+    border: none;
+    border-radius: 7px;
+}
+
+.roha {
+    background-color: red;
+    padding: 7px;
+    border-radius: 7px;
+    border: none;
+}
+
+.open-button,
+.open-button2 {
+    background-color: rgb(0, 0, 40);
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    margin-top: 0vw;
+    left: 0.05vw;
+    width: 14vw;
+    border-radius: 6px;
+}
+
+.form-popup {
+    display: none;
+    position: fixed;
+    Top: 2vw;
+    left: 38vw;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+.form-container {
+    max-width: 24vw;
+    padding: 10px;
+    background-color: white;
+}
+
+.form-container input[type=text] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-container input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-container .cancel {
+    background-color: red;
+}
+
+.form-container .btn:hover,
+.open-button:hover {
+    opacity: 0.8;
+}
+
+ul {
+    text-decoration: none;
+    font-size: 24px;
+    margin-bottom: 1vw;
+}
+
+.title a {
+    text-decoration: none;
+    color: white;
+}
+
+.opennio {
+    text-decoration: none;
+    text-underline-position: none;
+    color: white;
+}
+
+.listlinkage a {
+    text-decoration: none;
+    color: black;
+}

@@ -57,7 +57,7 @@ def dashboard_add_patient():
     #Add into table
     new_token_info = [current_user.id]
     print(new_token_info)
-    cur.execute(f"INSERT INTO tokens(token, doctor_id, apointments, current_treatment, current_diagnosis, notifications) VALUES('{new_token}', '{new_token_info}', '[]', '[]','[]','[]');")
+    cur.execute(f"INSERT INTO tokens(token, doctor_id, appointments, current_treatment, current_diagnosis, notifications) VALUES('{new_token}', '{new_token_info}', '[]', '[]','[]','[]');")
     conn.commit()
     return redirect(url_for('dashboard.dashboard'))
 

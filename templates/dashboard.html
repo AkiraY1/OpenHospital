@@ -1,31 +1,154 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-    {% block content %}
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div>
-                {{ messages[0] }}
-            </div>
-        {% endif %}
-        {% endwith %}    
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Hack-For-the-People-Project" content="Login and Signup" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" context="30" />
+    <link href="static/dashboard.css" rel="stylesheet" type="text/css" />
+</head>
+<title>
+</title>
 
-    <form method="POST" action="/dashboard/add-patient">
-        <button type="submit" name="add_patient" value="Add_Patient"> Add Patient </button>
-    </form>
-    <br>
-    <form method="POST" action="/dashboard/join-patient">
-        <input type="text" name="access_token" placeholder="Token">
-        <button type="submit" name="join_patient">Add patient that already exists</button>
-    </form>
-    <br>
-    <ul>
-        {% for patient in tokens_list %}
-            {% if patient[1] == None %}
-            <li> Unconfirmed </li>
-            {% else %}
-            <li><a href="{{url_for('dashboard.dashboard_view_patient', token=patient[0])}}">{{patient[1]}}</a></li>
+<body>
+    <div class="menu-bar">
+        <div class="title">
+            <a href="{{url_for('auth.welcome')}}">
+                <div class=opennio>
+                    <p> Open Hospital </p>
+                </div>
+            </a>
+
+        </div>
+        <ul>
+            {% if current_user.is_authenticated %}
+            <li class="active">
+                <a href="{{url_for('dashboard.dashboard')}}"></i>
+                    <div class="welcome1">Dashboard</div>
+                </a>
+                {% if current_user.role == 'Patient' %}
+                <div class="sub-menu-1">
+                    <ul>
+                        <li><a href="{{url_for('ps.symptoms')}}"> Symptoms </a></i>
+                        </li>
+                        <li><a href="{{url_for('ps.profile')}}"> Profile </a></li>
+                    </ul>
+                </div>
+                {% endif %}
+            </li>
+            <li class="active">
+                <a href="{{url_for('auth.logout')}}"></i>
+                    <div class="welcome1">Logout</div>
+                </a>
+            </li>
             {% endif %}
-            <li>{{patient[0]}}</li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+            {% if not current_user.is_authenticated %}
+            <li class="active">
+                <a href="{{url_for('auth.signup')}}"></i>
+                    <div class="welcome1">Signup</div>
+                </a>
+            </li>
+            <li class="active">
+                <a href="{{url_for('auth.login')}}"></i>
+                    <div class="welcome1">Login</div>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <div class="grid-container">
+        <div class="grid-item1">
+            <div class="notifications">
+                <h1>Notes</h1>
+                <div>
+                    <ul class="notes">
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="scroll">
+            <div class="grid-item2">
+                <div class="treatment">
+                    <h1>Patients' Info</h1>
+                </div>
+            </div>
+            <div class="grid-item3">
+                <div class="add-patients">
+                    <form method="POST" action="/dashboard/join-patient">
+                        <input id="token" type="text" name="access_token" placeholder="Token">
+                        <button class="token-submission" type="submit" name="join_patient">Join patient</button>
+                    </form>
+                    <form method="POST" action="/dashboard/add-patient">
+                        <button class="token-generation" type="submit" name="add_patient" value="Add_Patient"> Add Patient </button>
+                    </form>
+                </div>
+                <div class="searchpat">
+                    <h2>Search for Patients</h2>
+                </div>
+            </div>
+            <div class="grid-item4">
+                <div class="search">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for patient names.." title="Type in a name">
+                </div>
+
+                <div class="listlinkage">
+                    <table id="myTable" border="1">
+                        <tr class="header">
+                            <th>Patient Name</th>
+                            <th>Token</th>
+                        </tr>
+                        {% for patient in tokens_list %}
+                        <tr>
+                            {% if patient[1] == None %}
+                            <td> Unconfirmed </td>
+                            {% else %}
+                            <td><a href="{{url_for('dashboard.dashboard_view_patient', token=patient[0])}}">{{patient[1]}}</a></td>
+                            {% endif %}
+                            <td>{{patient[0]}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+
+            <script>
+                function openForm() {
+                    document.getElementById("myForm").style.display = "block";
+                }
+
+                function closeForm() {
+                    document.getElementById("myForm").style.display = "none";
+                }
+            </script>
+            <script>
+                function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("myTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                        td = tr[i].getElementsByTagName("td")[0];
+                        if (td) {
+                            txtValue = td.textContent || td.innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                            } else {
+                                tr[i].style.display = "none";
+                            }
+                        }
+                    }
+                }
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>
