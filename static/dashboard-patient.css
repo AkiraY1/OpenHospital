@@ -296,9 +296,8 @@ th {
 }
 
 .tablegroup{
-    position:fixed;
-    top:-1000px;
-    left:1000px;
+    position:relative;
+    top:100px;
 }
 
 .treatments {
