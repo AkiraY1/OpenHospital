@@ -68,6 +68,7 @@ def login_post():
 
     user_info = cur.execute(f"SELECT * FROM users WHERE email = '{email}';")
     user_info_fetched = user_info.fetchone()
+    print(user_info_fetched)
 
     if user_info_fetched[0] == None:
         flash("This email is not signed up yet")
