@@ -262,6 +262,12 @@ ul {
     line-height: 200px;
 }
 
+.schedule-list {
+    text-decoration: none;
+    margin-top: 1vw;
+    list-style: none;
+}
+
 .edit {
     width: 4vw;
 }
@@ -290,9 +296,8 @@ th {
 }
 
 .tablegroup{
-    position:fixed;
-    top:1000px;
-    left:1000px;
+    position:relative;
+    top:100px;
 }
 
 .treatments {
