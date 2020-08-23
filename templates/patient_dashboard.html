@@ -1,7 +1,259 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <div>
-        Hello there dashboard
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Hack-For-the-People-Project" content="Login and Signup" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" context="30" />
+    <link href="/static/dashboard-patient.css" rel="stylesheet" type="text/css" />
+</head>
+<title>
+</title>
+
+<body>
+    <div class="menu-bar">
+        <div class="title">
+            <a href="{{url_for('auth.welcome')}}">
+                <div class=opennio>
+                    <p> Open Hospital </p>
+                </div>
+            </a>
+
+        </div>
+        <ul>
+            {% if current_user.is_authenticated %}
+            <li class="active">
+                <a href="{{url_for('dashboard.dashboard')}}"></i>
+                    <div class="welcome1">Dashboard</div>
+                </a>
+                {% if current_user.role == 'Patient' %}
+                <div class="sub-menu-1">
+                    <ul>
+                        <li><a href="{{url_for('ps.symptoms')}}"> Symptoms </a></i>
+                        </li>
+                        <li><a href="{{url_for('ps.profile')}}"> Profile </a></li>
+                    </ul>
+                </div>
+                {% endif %}
+            </li>
+            <li class="active">
+                <a href="{{url_for('auth.logout')}}"></i>
+                    <div class="welcome1">Logout</div>
+                </a>
+            </li>
+            {% endif %}
+            {% if not current_user.is_authenticated %}
+            <li class="active">
+                <a href="{{url_for('auth.signup')}}"></i>
+                    <div class="welcome1">Signup</div>
+                </a>
+            </li>
+            <li class="active">
+                <a href="{{url_for('auth.login')}}"></i>
+                    <div class="welcome1">Login</div>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
     </div>
-{% blockend %}
+    <div class="grid-container">
+        <div class="grid-item1">
+            <div class="notifications">
+                <div class="notifications">
+                    <h1>Notes</h1>
+                </div>
+                <div>
+                    <ul class="notes">
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                        <li>"example"</li>
+                    </ul>
+                </div>
+                <div class="form-1">
+                    <button class="open-button" onclick="openForm()"> Add Notes </button>
+                    <div class="form-popup" id="myForm">
+                        <form method='POST' action="" class="form-container">
+                            <label for="note-form">Note</label>
+                            <input id="note-form" type="text" placeholder="" name="note">
+                            <button type="submit" class="btn" name="sub" value="profile" onclick="closeForm()"> Make Changes</button>
+                            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        </form>
+                    </div>
+                    <div class="breaks">
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item2">
+            <div class="patDash-header">
+                <h1>
+                    Patient Dashboard
+                </h1>
+            </div>
+            <div class="card">
+                <div class="img"><img src="/static/user1.png" alt="user" style="width:100%"></div>
+                <div class="welcome">
+                    <h2>My Profile</h2>
+                </div>
+                <div class="signup">
+                    <p><a href="profile.html">Edit</a></p>
+                </div>
+            </div>
+            <div class="form-2">
+                <button class="open-button" onclick="openForm2()"> Schedule an Appointment </button>
+                <div class="form-popup" id="myForm2">
+                    <form method='POST' action="" class="form-container">
+                        <label for="schedule-form">Patient Name</label>
+                        <input id="schedule-form" type="text" placeholder="" name="patientname">
+                        <label for="date">Date</label>
+                        <input id="date" type="date" placeholder="" name="dateSch">
+                        <label for="schedule-time">Time</label>
+                        <input id="schedule-time" type="text" placeholder="" name="time">
+                        <label for="schedule-purpose">Purpose</label>
+                        <input id="schedule-purpose" type="text" placeholder="" name="purpose">
+                        <button type="submit" class="btn" name="sub" value="schedule" onclick="closeForm2()"> Make Changes</button>
+                        <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
+                    </form>
+                </div>
+            </div>
+            <div class="treatment-table" border="1">
+                <table class="treatments">
+                    <tr>
+                        <th class="treatment">Treatments</th>
+                        <th class="date">Date</th>
+                        <th class="edit">Edit</th>
+                    </tr>
+                    <tr>
+                        <td>"example treatment"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example treatment"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example treatment</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example treatment"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example treatment</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="condition-table" border="1">
+                <table class="conditions">
+                    <tr>
+                        <th class="condition">Condition/Diagnosis</th>
+                        <th class="date">Date</th>
+                        <th class="edit">Edit</th>
+                    </tr>
+                    <tr>
+                        <td>"example condition"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example condition"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example condition"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example condition"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example condition"</td>
+                        <td>"example date"</td>
+                        <td>X</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="schedule">
+                <div class="schedule-header">
+                    <h3>Past and Upcoming Appointments</h3>
+                </div>
+                <table class="schedule-table" border="1">
+                    <tr>
+                        <th class="date">Date</th>
+                        <th class="time">Time</th>
+                        <th class="purpose">Purpose</th>
+                        <th class="edit">Edit</th>
+                    </tr>
+                    <tr>
+                        <td>"example date"</td>
+                        <td>"example time"</td>
+                        <td>"example purpose"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example date"</td>
+                        <td>"example time"</td>
+                        <td>"example purpose"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example date"</td>
+                        <td>"example time"</td>
+                        <td>"example purpose"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example date"</td>
+                        <td>"example time"</td>
+                        <td>"example purpose"</td>
+                        <td>X</td>
+                    </tr>
+                    <tr>
+                        <td>"example date"</td>
+                        <td>"example time"</td>
+                        <td>"example purpose"</td>
+                        <td>X</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+    </script>
+    <script>
+        function openForm2() {
+            document.getElementById("myForm2").style.display = "block";
+        }
+
+        function closeForm2() {
+            document.getElementById("myForm2").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>

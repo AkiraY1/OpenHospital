@@ -6,7 +6,7 @@
     <meta name="Hack-For-the-People-Project" content="Login and Signup" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" context="30" />
-    <link rel="stylesheet" type="text/css" href="static/docview2.css" />
+    <link rel="stylesheet" type="text/css" href="/static/docview2.css" />
 </head>
 <title>
 </title>
@@ -62,6 +62,19 @@
             <div class="titlemainprof">
                 <h1> Patient Folder</h1>
             </div>
+            <div class="h2-1">
+                <h2>Patient Profile</h2>
+            </div>
+            <div class="proflist">
+                <p>Name:"example"
+                    <br> Address:"example"
+                    <br> Gender:"example"
+                    <br> Ethnicity:"example"
+                    <br> Age:"example"
+                    <br> Birthdate:"example"
+                    <br> Occupation:"example"
+                </p>
+            </div>
             <div class="form-1">
                 <button class="open-button" onclick="openForm()"> Make Changes </button>
                 <div class="form-popup" id="myForm">
@@ -104,8 +117,8 @@
             <div class="condition-diagnosis-table2">
                 <table class="conditions" id="tableCon" border="1">
                     <tr>
-                        <th>Conditions/Diagnosis</th>
                         <th>Date</th>
+                        <th>Conditions/Diagnosis</th>
                         <th class="edit">Edit list</th>
                     </tr>
                 {% if diseases != [] %}
@@ -161,8 +174,8 @@
                 <div class="condition-diagnosis-table">
                     <table class="conditions" id="tableCon" border="1">
                         <tr>
-                            <th>Diagnosis</th>
                             <th>Date</th>
+                            <th>Diagnosis</th>
                             <th class="edit"></th>
                         </tr>
                     {% if diagnosis != None %}
@@ -186,8 +199,8 @@
             <div class="treatment-table">
                 <table class="treatment" id="tableTre" border="1">
                     <tr>
-                        <th>Treatment</th>
                         <th>Date</th>
+                        <th>Treatment</th>
                         <th class="edit"></th>
                     </tr>
                 {% if current_treatments != None %}
@@ -207,8 +220,8 @@
             <div class="appointment-table">
                 <table class="schedule-table" border="1">
                     <tr>
-                        <th class="date">Purpose</th>
                         <th class="purpose">Date</th>
+                        <th class="date">Purpose</th>
                         <th class="edit"></th>
                     </tr>
                 {% if appointments[0] != None %}

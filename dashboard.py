@@ -195,4 +195,4 @@ def dashboard_patient():
     if current_user.role != 'Patient':
         return redirect(url_for('dashboard.dashboard'))
     
-    return "Logged in successfully"
+    return render_template('patient_dashboard.html')
