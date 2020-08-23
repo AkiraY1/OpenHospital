@@ -37,7 +37,4 @@ def create_app():
     from profile_symptoms import ps as ps_blueprint
     app.register_blueprint(ps_blueprint)
 
-    from video import vid as vid_blueprint
-    app.register_blueprint(vid_blueprint)
-
     return app
