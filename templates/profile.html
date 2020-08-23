@@ -102,8 +102,9 @@
                 <div class="treatment-table">
                     <table class="treatment" id="tableTre" border="1">
                         <tr>
-                            <td> Date </td>
-                            <td> Disease</td>
+                            <th>Date</th>
+                            <th>Condition/Disease</th>
+                            <th class="edit"></th>
                         </tr>
                     {% if diseases != [] %}
                         {% for inst in diseases %}
@@ -124,7 +125,7 @@
                         <tr>
                             <th>Date</th>
                             <th>Condition/Disease</th>
-                            <th class="edit">Edit list</th>
+                            <th class="edit"></th>
                         </tr>
                         {% if treatments != [] %}
                             {% for inst in treatments %}
