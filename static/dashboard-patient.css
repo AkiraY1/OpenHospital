@@ -305,17 +305,11 @@ th {
     border: 1px solid rgb(0, 0, 40);
     width: 44vw;
 }
- .schedule-table {
+ .schedule,.conditions {
     border-collapse: collapse;
     border: 1px solid rgb(0, 0, 40);
     width: 44vw;
 }
-.conditions {
-    border-collapse: collapse;
-    border: 1px solid rgb(0, 0, 40);
-    width: 44vw;
-}
-
 
 .title a {
     text-decoration: none;
