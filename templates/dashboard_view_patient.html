@@ -1,110 +1,268 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-    {% block content %}
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div>
-                {{ messages[0] }}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="Hack-For-the-People-Project" content="Login and Signup" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="refresh" context="30" />
+        <link href="static/docview.css" rel="stylesheet" type="text/css">
+    </head>
+    <title>
+    </title>
+
+    <body>
+        <div class="menu-bar">
+            <div class="title">
+                <a href="{{url_for('auth.welcome')}}">
+                    <div class=opennio>
+                        <p> Open Hospital </p>
+                    </div>
+                </a>
+
             </div>
-        {% endif %}
-        {% endwith %}    
+            <ul>
+                {% if current_user.is_authenticated %}
+                <li class="active">
+                    <a href="{{url_for('dashboard.dashboard')}}"></i>
+                        <div class="welcome1">Dashboard</div>
+                    </a>
+                    {% if current_user.role == 'Patient' %}
+                    <div class="sub-menu-1">
+                        <ul>
+                            <li><a href="{{url_for('ps.symptoms')}}"> Symptoms </a></i>
+                            </li>
+                            <li><a href="{{url_for('ps.profile')}}"> Profile </a></li>
+                        </ul>
+                    </div>
+                    {% endif %}
+                </li>
+                <li class="active">
+                    <a href="{{url_for('auth.logout')}}"></i>
+                        <div class="welcome1">Logout</div>
+                    </a>
+                </li>
+                {% endif %}
+                {% if not current_user.is_authenticated %}
+                <li class="active">
+                    <a href="{{url_for('auth.signup')}}"></i>
+                        <div class="welcome1">Signup</div>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{{url_for('auth.login')}}"></i>
+                        <div class="welcome1">Login</div>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="grid-container">
+            <div class="item1">
+                <div class="titlemainprof">
+                    <h1> Patient Folder</h1>
+                </div>
+                <div class="form-1">
+                    <button class="open-button" onclick="openForm()"> Make Changes </button>
+                    <div class="form-popup" id="myForm">
+                        <form method='POST' action="" class="form-container">
+                            <h4>Medical History</h4>
+                            <br>
+                            <h6>Conditions/Diagnosis</h6>
+                            <input id="medHis-con" type="text" placeholder="" name="medHis-con">
+                            <label for="medHis-con-date">Date</label>
+                            <input type="date" id="medHis-con-date" placeholder="" name="medHis-con-date">
+                            <h6>Treatments</h6>
+                            <input id="medHis-tre" type="text" placeholder="" name="medHis-tre">
+                            <label for="medHis-tre-date">Date</label>
+                            <input type="date" id="medHis-tre-date" placeholder="" name="medHis-tre-date">
+                            <h4>Symptoms</h4>
+                            <input id="Symptoms" type="text" placeholder="" name="Symptoms">
+                            <h4>Current Condition/Diagnosis</h4>
+                            <label for="Conditions">Conditions/Diagnosis</label>
+                            <input id="Conditions" type="text" placeholder="" name="Conditions">
+                            <label for="Conditions-date">Date</label>
+                            <input type="date" id="Conditions-date" placeholder="" name="Condition-date">
+                            <h4>Current Treatments</h4>
+                            <label for="Treatments">Treatments</label>
+                            <input id="Treatments" type="text" placeholder="" name="Treatments">
+                            <label for="Treatments-date">Date</label>
+                            <input type="date" id="Treatments-date" placeholder="" name="Treatments-date">
+                            <h4>Appointments</h4>
+                            <label for="Appointments-datetime">Date and Time</label>
+                            <input type="datetime-local" id="Appointments-datetime" placeholder="" name="Appointments-datetime">
+                            <label for="Appointments-purpose">Purpose</label>
+                            <input id="Appointments-purpose" type="text" placeholder="" name="Appointments-purpose">
+                            <button type="submit" class="btn" name="sub" value="submit" onclick="closeForm()"> Add Note</button>
+                            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="h2-2">
+                    <h2>Medical History</h2>
+                </div>
+                <div class="condition-diagnosis-table2">
+                    <table class="conditions" id="tableCon" border="1">
+                        <tr>
+                            <th>Conditions/Diagnosis</th>
+                            <th>Date</th>
+                            <th class="edit">Edit list</th>
+                        </tr>
+                    {% if diseases != [] %}
+                        {% for inst in diseases %}
+                        <tr>
+                            <td> {{inst[0]}}</td>
+                            <td> {{inst[1]}}</td>
+                            <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </table>
+                </div>
+                <div class="treatment-table">
+                    <table class="treatment" id="tableTre" border="1">
+                        <tr>
+                            <th> Date </th>
+                            <th> Treatment</th>
+                            <th class="edit"></th>
+                        </tr>
+                    {% if treatments != [] %}
+                        {% for inst in treatments %}
+                        <tr>
+                            <td> {{inst[0]}} </td>
+                            <td> {{inst[1]}}</td>
+                            <td><a href='{{url_for("ps.delete_t", t=inst[1])}}'>X</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </table>
+                </div>
+                <div class="h2-3">
+                    <h2>Symptoms</h2>
+                </div>
+                <div class="table">
+                    <table class="symptom-tracking-table">
+                        <tr>
+                            <th>Symptom</th>
+                            <th class="edit"></th>
+                        </tr>
+                    {% if symptoms != [] %}
+                        {% for inst in symptoms %}
+                        <tr>
+                            <td> {{inst[1]}}</td>
+                            <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </table>
+                </div>
+                <div class="h2-4">
+                    <h2>Current Diagnosis</h2>
+                    <div class="condition-diagnosis-table">
+                        <table class="conditions" id="tableCon" border="1">
+                            <tr>
+                                <th>Diagnosis</th>
+                                <th>Date</th>
+                                <th class="edit"></th>
+                            </tr>
+                        {% if diagnosis != None %}
+                            {% for inst in diagnosis %}
+                            <tr>
+                                <td> {{inst[0]}}</td>
+                                <td> {{inst[1]}}</td>
+                                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                        </table>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <div class="item2">
+                <div class="h2-5">
+                    <h2>Current Treatment</h2>
+                </div>
+                <div class="treatment-table">
+                    <table class="treatment" id="tableTre" border="1">
+                        <tr>
+                            <th>Treatment</th>
+                            <th>Date</th>
+                            <th class="edit"></th>
+                        </tr>
+                    {% if current_treatments != None %}
+                        {% for inst in current_treatments %}
+                        <tr>
+                            <td> {{inst[0]}}</td>
+                            <td> {{inst[1]}}</td>
+                            <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </table>
+                </div>
+                <div class="h2-6">
+                    <h2> Appointments</h2>
+                </div>
+                <div class="appointment-table">
+                    <table class="schedule-table" border="1">
+                        <tr>
+                            <th class="date">Purpose</th>
+                            <th class="purpose">Date</th>
+                            <th class="edit"></th>
+                        </tr>
+                    {% if appointments[0] != None %}
+                        {% for inst in appointments[0] %}
+                        <tr>
+                            <td> {{inst[0]}}</td>
+                            <td> {{inst[1]}}</td>
+                            <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </table>
+                </div>
+                <div class="h2-7">
+                    <h2> Scheduling Requests</h2>
+                </div>
+                <div class="newtableo">
+                    <table id="newTable">
+                        <div class="tableo">
+                            <tr class="header">
+                                <th>Patient Name</th>
+                                <th>Date Requested</th>
+                                <th>Time Requested</th>
+                                <th>Purpose</th>
+                                <th class="accept">Accept</th>
+                                <th class="deny">Deny</th>
+                            </tr>
+                            <tr>
+                                <td>Jane Hill</td>
+                                <td>3/4/21</td>
+                                <td>13:30</td>
+                                <td>Knee replacement follow-up</td>
+                                <td>
+                                    <div class="verde"><a href="#">Accept</a></div>
+                                </td>
+                                <td>
+                                    <div class="roha"><a href="#">Deny</a></div>
+                                </td>
+                            </tr>
+                        </div>
+                    </table>
+                </div>
+                <br>
+            </div>
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
 
-        <h2>Notifications</h2>
-        <h2>Appointments</h2>
-        <h3>Scheduled Appointments</h3>
-        {% if appointments[0] != None %}
-        <table>
-            {% for inst in appointments[0] %}
-            <tr>
-                <td> {{inst[0]}}</td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("dashboard.accept_ra", content=inst, token=token)}}'>Accept</a></td>
-                <td><a href='{{url_for("dashboard.delete_ra", content=inst, token=token)}}'>Delete</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <h3>Requested Appointments</h3>
-        {% if appointments[1] != None %}
-        <table>
-            {% for inst in appointments[1] %}
-            <tr>
-                <td> {{inst[0]}}</td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <h2>Current Treatments</h2>
-        {% if current_treatments != None %}
-        <table>
-            {% for inst in current_treatments %}
-            <tr>
-                <td> {{inst[0]}}</td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <h2>Current Diagnosis</h2>
-        {% if diagnosis != None %}
-        <table>
-            {% for inst in diagnosis %}
-            <tr>
-                <td> {{inst[0]}}</td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <h2>Current Symptoms</h2>
-        {% if symptoms != [] %}
-        <table>
-            {% for inst in symptoms %}
-            <tr>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <h2>Patient Profile</h2>
-        <p>Not doing this because its just variables</p>
-        <h2>Patient History</h2>
-        <h3> Diseases</3>
-        {% if diseases != [] %}
-        <table>
-            <tr>
-                <td> Date </td>
-                <td> Disease</td>
-            </tr>
-            {% for inst in diseases %}
-            <tr>
-                <td> {{inst[0]}}</td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <h3> Treatments</h3>
-        {% if treatments != [] %}
-        <table>
-            <tr>
-                <td> Date </td>
-                <td> Treatment</td>
-            </tr>
-            {% for inst in treatments %}
-            <tr>
-                <td> {{inst[0]}} </td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_t", t=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-    </ul>
-{% endblock %}
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+    </body>
+
+</html>
