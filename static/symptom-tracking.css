@@ -103,22 +103,47 @@ body {
     line-height: 40px;
 }
 
+.grid-item2 {
+    margin: 2vw;
+    width: 68vw;
+    line-height: 40px;
+}
+
+li {
+    color: black;
+    display: block;
+    font-size: 20px;
+    list-style-type: circle;
+}
+
+.add,
+input[type=text] {
+    width: 40vw;
+    height: 32px;
+    border: none;
+    border-radius: 4px;
+}
+
+.add {
+    background-color: #4CAF50;
+}
+
 .open-button {
     background-color: rgb(0, 0, 40);
     color: white;
     padding: 16px 20px;
     border: none;
     cursor: pointer;
-    position: fixed;
+    position: relative;
     margin-top: 2vw;
-    left: 2vw;
     width: 24vw;
+    margin-bottom: 0.5vw;
 }
 
 .form-popup {
     display: none;
     position: fixed;
-    Top: 2vw;
+    bottom: 20vw;
     left: 38vw;
     border: 3px solid #f1f1f1;
     z-index: 9;
@@ -130,8 +155,7 @@ body {
     background-color: white;
 }
 
-.form-container input[type=text],
-.form-container input[type=date] {
+.form-container input[type=text] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -139,15 +163,12 @@ body {
     background: #f1f1f1;
 }
 
-.form-container input[type=text]:focus,
-.form-container input[type=date]:focus {
+.form-container input[type=text]:focus {
     background-color: #ddd;
     outline: none;
 }
 
-.form-container .btn,
-.form-container .btnCon,
-.form-container .btnTre {
+.form-container .btn {
     background-color: #4CAF50;
     color: white;
     padding: 16px 20px;
@@ -157,42 +178,18 @@ body {
     margin-bottom: 10px;
 }
 
-.form-container .cancel,
-.form-container .btnCon-cancel,
-.form-container .btnTre-cancel {
+.form-container .cancel {
     background-color: red;
 }
 
-.form-container .btnCon-cancel,
-.form-container .btnTre-cancel {
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 10px
-}
-
 .form-container .btn:hover,
-.open-button:hover,
-.open-button2:hover,
-.open-button3:hover,
-.form-container .btnCon-cancel:hover,
-.form-container .btnTre-cancel:hover,
-.form-container .btnCon:hover,
-.form-container .btnTre:hover {
+.open-button:hover {
     opacity: 0.8;
 }
 
 .grid-item2 {
     margin: 2vw;
     width: 68vw;
-}
-
-.treatment-table,
-.condition-diagnosis-table {
-    width: 68vw;
-    margin-bottom: 2vw;
 }
 
 table {
@@ -220,37 +217,24 @@ th {
 }
 
 td:last-child {
-    color: red
-}
-
-.open-button2,
-.open-button3 {
-    background-color: rgb(0, 0, 40);
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 24vw;
-    margin-left: 8vw;
-}
-
-.formsConTre {
-    margin-top: 2vw;
-    align-items: center;
-}
-
-.open-button3 {
-    margin-top: 0.5vw;
-}
-
-.edit {
-    width: 4vw;
-}
-
-td:last-child {
     color: white;
 }
 
 td:last-child:hover {
     color: red
+}
+
+.diagnosis-list {
+    margin-top: 2vw;
+}
+
+.title a {
+    text-decoration: none;
+    color: white;
+}
+
+.opennio {
+    text-decoration: none;
+    text-underline-position: none;
+    color: white;
 }
