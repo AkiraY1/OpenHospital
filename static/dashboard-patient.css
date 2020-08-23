@@ -303,17 +303,16 @@ th {
     color: white;
 }
 
+.treatment-table {
+    margin-left: 30vw;
+    position: fixed;
+    top: 1000px;
+}
+
 .treatments {
     border-collapse: collapse;
     border: 1px solid rgb(0, 0, 40);
     width: 44vw;
-}
-
-.treatment-table {
-    margin-left: 30vw;
-    margin-top: -30vw;
-    position: relative;
-    top: 1000px;
 }
 
 .conditions {
