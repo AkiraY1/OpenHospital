@@ -280,14 +280,6 @@ td:last-child:hover {
     color: red
 }
 
-.schedule-table {
-    position: relative;
-    margin-left: 30vw;
-    margin-top: 0.5vw;
-    border-collapse: collapse;
-    width: 44vw;
-}
-
 table,
 th,
 td {
@@ -303,10 +295,10 @@ th {
     color: white;
 }
 
-.treatment-table {
-    margin-left: 30vw;
-    position: fixed;
-    top: 1000px;
+.tablegroup{
+    position:fixed;
+    top:400px;
+    left:1000px;
 }
 
 .treatments {
@@ -314,14 +306,15 @@ th {
     border: 1px solid rgb(0, 0, 40);
     width: 44vw;
 }
-
+ .schedule-table {
+    border-collapse: collapse;
+    border: 1px solid rgb(0, 0, 40);
+    width: 44vw;
+}
 .conditions {
     border-collapse: collapse;
     border: 1px solid rgb(0, 0, 40);
     width: 44vw;
-    margin-left: 30vw;
-    margin-top: 2vw;
-    position: relative;
 }
 
 .schedule-header {
