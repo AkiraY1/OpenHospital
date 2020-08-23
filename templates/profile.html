@@ -1,84 +1,199 @@
-{% extends "base.html " %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <div>
-        Name: {{current_user.name}}
-        Email: {{current_user.email}}
-        Role: {{current_user.role}}
-        Address: {{current_user.address}}
-        Gender: {{current_user.gender}}
-        Ethnicity: {{current_user.ethnicity}}
-        Age: {{current_user.age}}
-        Birthdate: {{current_user.birthdate}}
-        Occupation: {{current_user.occupation}}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Hack-For-the-People-Project" content="Login and Signup" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" context="30" />
+    <link href="static/profile-style.css" rel="stylesheet" type="text/css" />
+</head>
+<title>
+</title>
+
+<body>
+    <div class="menu-bar">
+        <div class="title">
+            <a href="{{url_for('auth.welcome')}}">
+                <div class=opennio>
+                    <p> Open Hospital </p>
+                </div>
+            </a>
+
+        </div>
+        <ul>
+            {% if current_user.is_authenticated %}
+            <li class="active">
+                <a href="{{url_for('dashboard.dashboard')}}"></i>
+                    <div class="welcome1">Dashboard</div>
+                </a>
+                {% if current_user.role == 'Patient' %}
+                <div class="sub-menu-1">
+                    <ul>
+                        <li><a href="{{url_for('ps.symptoms')}}"> Symptoms </a></i>
+                        </li>
+                        <li><a href="{{url_for('ps.profile')}}"> Profile </a></li>
+                    </ul>
+                </div>
+                {% endif %}
+            </li>
+            <li class="active">
+                <a href="{{url_for('auth.logout')}}"></i>
+                    <div class="welcome1">Logout</div>
+                </a>
+            </li>
+            {% endif %}
+            {% if not current_user.is_authenticated %}
+            <li class="active">
+                <a href="{{url_for('auth.signup')}}"></i>
+                    <div class="welcome1">Signup</div>
+                </a>
+            </li>
+            <li class="active">
+                <a href="{{url_for('auth.login')}}"></i>
+                    <div class="welcome1">Login</div>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
     </div>
-    <br>
-    <form method='POST' action="/profile">
-        <label for="name">Name</label>
-        <input id="name" type="text" placeholder={{current_user.name}} name="name">
-        <label for="name">Address</label>
-        <input id="name" type="text" placeholder={{current_user.address}} name="address">
-        <label for="name">Gender</label>
-        <input id="name" type="text" placeholder={{current_user.gender}} name="gender">
-        <label for="name">Ethnicity</label>
-        <input id="name" type="text" placeholder={{current_user.ethnicity}} name="ethnicity">
-        <label for="name">Age</label>
-        <input id="name" type="text" placeholder={{current_user.age}} name="age">
-        <label for="name">Birthdate</label>
-        <input id="name" type="text" placeholder={{current_user.birthdate}} name="birthdate">
-        <label for="name">Occupation</label>
-        <input id="name" type="text" placeholder={{current_user.occupation}} name="occupation">
-        <button type="submit" name='sub' value="profile"> Make Changes</button>
-    </form>
-    <div>
-        <h1>Medical History:</h1>
-        <h2> Diseases</h2>
-        {% if diseases != [] %}
-        <table>
-            <tr>
-                <td> Date </td>
-                <td> Disease</td>
-            </tr>
-            {% for inst in diseases %}
-            <tr>
-                <td> {{inst[0]}}</td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        <h2> Treatments</h2>
-        {% if treatments != [] %}
-        <table>
-            <tr>
-                <td> Date </td>
-                <td> Treatment</td>
-            </tr>
-            {% for inst in treatments %}
-            <tr>
-                <td> {{inst[0]}} </td>
-                <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("ps.delete_t", t=inst[1])}}'>X</a></td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-    </div>
-    <br>
-    <form method='POST' action="/profile/add-disease">
-        <label for="name">Disease/Condition</label>
-        <input id="name" type="text" name="disease">
-        <label for="name">Date</label>
-        <input id="name" type="date" name="date">
-        <button type="submit" name='dis' value="dis"> Add Changes</button>
-    </form>
-    <br>
-    <form method='POST' action="/profile/add-treatment">
-        <label for="name">Treatment</label>
-        <input id="name" type="text" name="treatment">
-        <label for="name">Date</label>
-        <input id="name" type="date" name="date">
-        <button type="submit" name='tr' value="tr"> Add Changes</button>
-    </form>
-{% endblock %}
+    <div class="grid-container">
+        <div class="grid-item1">
+            <div class="profile-info">
+                <div class="profile-header">
+                    <h1>Profile</h1>
+                </div>
+                <p>Name: {{current_user.name}}
+                    <br> Address: {{current_user.address}}
+                    <br> Gender: {{current_user.gender}}
+                    <br> Ethnicity:{{current_user.ethnicity}}
+                    <br> Age:{{current_user.age}}
+                    <br> Birthdate:{{current_user.birthdate}}
+                    <br> Occupation:{{current_user.occupation}}
+                </p>
+            </div>
+            <div class="profile-edit-form">
+                <button class="open-button" onclick="openForm()">Open Form</button>
+                <div class="form-popup" id="myForm">
+                    <form method='POST' action="/profile" class="form-container">
+                        <label for="name">Name</label>
+                        <input id="name" type="text" placeholder={{current_user.name}} name="name">
+                        <label for="name">Address</label>
+                        <input id="name" type="text" placeholder={{current_user.address}} name="address">
+                        <label for="name">Gender</label>
+                        <input id="name" type="text" placeholder={{current_user.gender}} name="gender">
+                        <label for="name">Ethnicity</label>
+                        <input id="name" type="text" placeholder={{current_user.ethnicity}} name="ethnicity">
+                        <label for="name">Age</label>
+                        <input id="name" type="text" placeholder={{current_user.age}} name="age">
+                        <label for="name">Birthdate</label>
+                        <input id="name" type="text" placeholder={{current_user.birthdate}} name="birthdate">
+                        <label for="name">Occupation</label>
+                        <input id="name" type="text" placeholder={{current_user.occupation}} name="occupation">
+                        <button type="submit" class="btn" name="sub" value="profile" onclick="closeForm()"> Make Changes</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item2">
+            <div class="treatment">
+                <h2>Treatment</h2>
+                <div class="treatment-table">
+                    <table class="treatment" id="tableTre" border="1">
+                        <tr>
+                            <td> Date </td>
+                            <td> Disease</td>
+                        </tr>
+                    {% if diseases != [] %}
+                        {% for inst in diseases %}
+                        <tr>
+                            <td> {{inst[0]}}</td>
+                            <td> {{inst[1]}}</td>
+                            <td><a href='{{url_for("ps.delete_d", d=inst[1])}}'>X</a></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </table>
+                </div>
+            </div>
+            <div class="condition/diagnosis">
+                <h2>Condition/Diagnosis</h2>
+                <div class="condition-diagnosis-table">
+                    <table class="conditions" id="tableCon" border="1">
+                        <tr>
+                            <th>Date</th>
+                            <th>Condition/Disease</th>
+                            <th class="edit">Edit list</th>
+                        </tr>
+                        {% if treatments != [] %}
+                            {% for inst in treatments %}
+                            <tr>
+                                <td> {{inst[0]}} </td>
+                                <td> {{inst[1]}}</td>
+                                <td><a href='{{url_for("ps.delete_t", t=inst[1])}}'>X</a></td>
+                            </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </table>
+                    <div class="formsConTre">
+                        <div class="form-2">
+                            <button class="open-button2" onclick="openForm2()">Add Treatment</button>
+                            <div class="form-popup" id="myForm2">
+                                <form method='POST' action="/profile/add-treatment" class="form-container">
+                                    <label for="treatments-form">Treatment</label>
+                                    <input id="treatments-form" type="text" placeholder="" name="treatment">
+                                    <label for="date">Date</label>
+                                    <input id="date" type="date" placeholder="" name="date">
+                                    <button type="submit" class="btnTre" name="tr" value="tr" onclick="closeForm2()"> Make Changes</button>
+                                    <button type="button" class="btnTre-cancel" onclick="closeForm2()">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="form-3">
+                            <button class="open-button3" onclick="openForm3()">Add Condition/Diagnosis</button>
+                            <div class="form-popup" id="myForm3">
+                                <form method='POST' action="/profile/add-disease" class="form-container">
+                                    <label for="conditions-form">Conditions/Diagnosis</label>
+                                    <input id="conditions-form" type="text" placeholder="" name="disease">
+                                    <label for="date">Date</label>
+                                    <input id="date" type="date" placeholder="" name="date">
+                                    <button type="submit" class="btnCon" name="dis" value="dis" onclick="closeForm3()"> Make Changes</button>
+                                    <button type="button" class="btnCon-cancel" onclick="closeForm3()">Close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function openForm() {
+                document.getElementById("myForm").style.display = "block";
+            }
+
+            function closeForm() {
+                document.getElementById("myForm").style.display = "none";
+            }
+        </script>
+        <script>
+            function openForm2() {
+                document.getElementById("myForm2").style.display = "block";
+            }
+
+            function closeForm2() {
+                document.getElementById("myForm2").style.display = "none";
+            }
+        </script>
+        <script>
+            function openForm3() {
+                document.getElementById("myForm3").style.display = "block";
+            }
+
+            function closeForm3() {
+                document.getElementById("myForm3").style.display = "none";
+            }
+        </script>
+</body>
+
+</html>

@@ -18,8 +18,8 @@
             <tr>
                 <td> {{inst[0]}}</td>
                 <td> {{inst[1]}}</td>
-                <td><a href='{{url_for("dashboard.accept_ra", content=inst)}}'>Accept</a></td>
-                <td><a href='{{url_for("dashboard.delete_ra", content=inst)}}'>Delete</a></td>
+                <td><a href='{{url_for("dashboard.accept_ra", content=inst, token=token)}}'>Accept</a></td>
+                <td><a href='{{url_for("dashboard.delete_ra", content=inst, token=token)}}'>Delete</a></td>
             </tr>
             {% endfor %}
         </table>

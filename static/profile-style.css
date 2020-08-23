@@ -1,0 +1,320 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/*makes sure no alteration of pure letter shape and size*/
+
+body {
+    background-color: white;
+    background-size: cover;
+}
+
+
+/*centers image, don't add centering for best results*/
+
+.menu-bar {
+    background: rgb(0, 0, 40);
+    height: 60px;
+}
+
+
+/*background of overall top bar, brings words to the middle*/
+
+.menu-bar ul {
+    display: inline-flex;
+    list-style: none;
+    color: cornflowerblue;
+    float: right;
+    text-align: center;
+}
+
+
+/*brings all the words to the middle aligned in one line, not to the side, like a tab*/
+
+.menu-bar ul li {
+    width: 120px;
+    margin: 10px;
+    padding: 15px;
+    border-left: 200px;
+    border-right: 200px;
+}
+
+
+/*gives spaces between the words in the tab*/
+
+.menu-bar ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+
+/*removes links' tranditional blue/purple color and underline */
+
+.active:hover,
+.menu-bar ul li a :hover {
+    background: skyblue;
+    border-radius: 20px
+}
+
+
+/*when you hover over the links, it gives the different color and shape*/
+
+.menu-bar .fa {
+    margin-right: 8px;
+}
+
+
+/*gives icons spacing from the word*/
+
+.sub-menu-1 {
+    display: none;
+}
+
+
+/*stops displaying submenu words, hides them so they can be revealed*/
+
+.menu-bar ul li:hover .sub-menu-1 {
+    display: block;
+    position: absolute;
+    background: cornflowerblue;
+    margin-top: 15px;
+    margin-left: -15px;
+    border-radius: 20px;
+}
+
+
+/*gives the dropdown menu border block characteristics, whether you want it block, inline, vertical dropown, how thick, etc. */
+
+.menu-bar ul li:hover .sub-menu-1 ul {
+    display: block;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+
+/* gives the each separate thing in the list its characteristics*/
+
+.menu-bar ul li:hover .sub-menu-1 ul li {
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px dotted color;
+    border-radius: 0px;
+    background: transparent;
+    text-align: left;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child {
+    border-bottom: none;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover {
+    color: rgb(0, 0, 40);
+}
+
+.title {
+    text-align: right;
+    display: inline-block;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    color: White;
+    padding: 5px;
+    padding-left: 5px;
+    margin-left: 5px;
+}
+
+.welcome1 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.grid-item1 {
+    margin: 2vw;
+    width: 24vw;
+    line-height: 40px;
+}
+
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+
+.open-button {
+    background-color: rgb(0, 0, 40);
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    margin-top: 2vw;
+    left: 2vw;
+    width: 24vw;
+}
+
+
+/* The popup form - hidden by default */
+
+.form-popup {
+    display: none;
+    position: fixed;
+    Top: 2vw;
+    left: 38vw;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+
+/* Add styles to the form container */
+
+.form-container {
+    max-width: 24vw;
+    padding: 10px;
+    background-color: white;
+}
+
+
+/* Full-width input fields */
+
+.form-container input[type=text],
+.form-container input[type=date] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+
+
+/* When the inputs get focus, do something */
+
+.form-container input[type=text]:focus,
+.form-container input[type=date]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+
+/* Set a style for the submit/login button */
+
+.form-container .btn,
+.form-container .btnCon,
+.form-container .btnTre {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+/* Add a red background color to the cancel button */
+
+.form-container .cancel,
+.form-container .btnCon-cancel,
+.form-container .btnTre-cancel {
+    background-color: red;
+}
+
+.form-container .btnCon-cancel,
+.form-container .btnTre-cancel {
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 10px
+}
+
+
+/* Add some hover effects to buttons */
+
+.form-container .btn:hover,
+.open-button:hover,
+.open-button2:hover,
+.open-button3:hover,
+.form-container .btnCon-cancel:hover,
+.form-container .btnTre-cancel:hover,
+.form-container .btnCon:hover,
+.form-container .btnTre:hover {
+    opacity: 0.8;
+}
+
+.grid-item2 {
+    margin: 2vw;
+    width: 68vw;
+}
+
+.treatment-table,
+.condition-diagnosis-table {
+    width: 68vw;
+    margin-bottom: 2vw;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid rgb(0, 0, 40);
+    width: 68vw;
+}
+
+table,
+th,
+td {
+    border: 1px solid rgb(0, 0, 40);
+    text-align: center;
+    padding: 4px;
+    font-family: sans-serif;
+}
+
+th {
+    background: rgb(0, 0, 40);
+    color: white;
+}
+
+.edit {
+    width: 4vw;
+}
+
+td:last-child {
+    color: red
+}
+
+.open-button2,
+.open-button3 {
+    background-color: rgb(0, 0, 40);
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 24vw;
+    margin-left: 8vw;
+}
+
+.formsConTre {
+    margin-top: 2vw;
+    align-items: center;
+}
+
+.open-button3 {
+    margin-top: 0.5vw;
+}
+
+.title a {
+    text-decoration: none;
+    color: white;
+}
+
+.opennio {
+    text-decoration: none;
+    text-underline-position: none;
+    color: white;
+}
+
+.form-popup {
+    overflow-y: scroll;
+}

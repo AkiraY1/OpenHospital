@@ -138,25 +138,54 @@ def dashboard_view_patient(token):
     #rlisty_appointments = ''.join(elem for elem in token_info_list[0][1])
     #rappointments_list = eval(rlisty_appointments)
 
-    return render_template('dashboard_view_patient.html', diseases=diseases_list, treatments=treatments_list, symptoms=symptoms_list, diagnosis=diagnosis_list, current_treatments=current_treatments_list, appointments=appointments_list)
+    return render_template('dashboard_view_patient.html', token=token, diseases=diseases_list, treatments=treatments_list, symptoms=symptoms_list, diagnosis=diagnosis_list, current_treatments=current_treatments_list, appointments=appointments_list)
 
-#Delete appointment requests
-@dash.route('/dashboard/delete-ra/<string:content>', methods=['GET', 'POST'])
+#Delete appointment requests ---------------------------------------------------------------------------WIP
+@dash.route('/dashboard/delete-ra/<string:content>/<string:token>', methods=['GET', 'POST'])
 @login_required
-def delete_ra(content):
+def delete_ra(content, token):
     conn = sqlite3.connect('tokens.db')
     cur = conn.cursor()
 
-    cur.execute()
+    l = cur.execute("SELECT appointments FROM tokens")
+    appointments_results = l.fetchall()
 
-    return redirect(url_for('dashboard.dashboard'))
+    for app in appointments_results:
+        print("App:" + str(app))
+        print(content)
+    if str(content[1]) in appointments_results:
+        print("Passed")
 
-#Accept appointment requests
+    print(appointments_results)
+
+    return redirect(url_for('dashboard.dashboard_view_patient', token=token))
+
+#Accept appointment requests---------------------------------------------------------------------------WIP
 @dash.route('/dashboard/accept-ra/<string:content>', methods=['GET', 'POST'])
 @login_required
 def accept_ra(content):
     print(content)
     return redirect(url_for('dashboard.dashboard'))
+
+@dash.route('/dashboard/edit', methods=['GET', 'POST'])
+@login_required
+def dashboard_edit():
+    #import pdb
+    #pdb.set_trace()
+    current_diagnosis = request.form.get('current_diagnosis')
+    current_treatment = request.form.get('current_treatment')
+    gender = request.form.get('appointments')
+    age = request.form.get('age')
+    ethnicity = request.form.get('ethnicity')
+    birthdate = request.form.get('birthdate')
+    occupation = request.form.get('occupation')
+
+    info_list = [('current_diagnosis', current_diagnosis), ('current_treatment', address), ('gender', gender), ('age', age), ('ethnicity', ethnicity), ('birthdate', birthdate), ('occupation', occupation)]
+    for info in info_list:
+        if info[1] != '':
+            cur.execute(f"UPDATE tokens SET {info[0]} = '{info[1]}' WHERE id = '{current_user.id}';")
+            conn.commit()
+    return redirect(url_for('ps.profile', diseases=list_diseases, treatments=list_treatments))
 
 #Patient Dashboard------------------------------------------------------------------------------------------
 
@@ -165,4 +194,5 @@ def accept_ra(content):
 def dashboard_patient():
     if current_user.role != 'Patient':
         return redirect(url_for('dashboard.dashboard'))
+    
     return "Logged in successfully"

@@ -1,0 +1,260 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+/*makes sure no alteration of pure letter shape and size*/
+
+body {
+    background-color: rgb(186, 229, 253);
+    background-size: cover;
+}
+
+
+/*centers image, don't add centering for best results*/
+
+.menu-bar {
+    background: rgb(0, 0, 40);
+    height: 60px;
+}
+
+
+/*background of overall top bar, brings words to the middle*/
+
+.menu-bar ul {
+    display: inline-flex;
+    list-style: none;
+    color: cornflowerblue;
+    float: right;
+    text-align: center;
+}
+
+
+/*brings all the words to the middle aligned in one line, not to the side, like a tab*/
+
+.menu-bar ul li {
+    width: 120px;
+    margin: 10px;
+    padding: 15px;
+    border-left: 200px;
+    border-right: 200px;
+}
+
+
+/*gives spaces between the words in the tab*/
+
+.menu-bar ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+
+/*removes links' tranditional blue/purple color and underline */
+
+.active:hover,
+.menu-bar ul li a :hover {
+    background: skyblue;
+    border-radius: 20px
+}
+
+
+/*when you hover over the links, it gives the different color and shape*/
+
+.menu-bar .fa {
+    margin-right: 8px;
+}
+
+
+/*gives icons spacing from the word*/
+
+.sub-menu-1 {
+    display: none;
+}
+
+
+/*stops displaying submenu words, hides them so they can be revealed*/
+
+.menu-bar ul li:hover .sub-menu-1 {
+    display: block;
+    position: absolute;
+    background: cornflowerblue;
+    margin-top: 15px;
+    margin-left: -15px;
+    border-radius: 20px;
+}
+
+
+/*gives the dropdown menu border block characteristics, whether you want it block, inline, vertical dropown, how thick, etc. */
+
+.menu-bar ul li:hover .sub-menu-1 ul {
+    display: block;
+    margin: 10px;
+    border-radius: 20px;
+}
+
+
+/* gives the each separate thing in the list its characteristics*/
+
+.menu-bar ul li:hover .sub-menu-1 ul li {
+    width: 150px;
+    padding: 10px;
+    border-bottom: 1px dotted color;
+    border-radius: 0px;
+    background: transparent;
+    text-align: left;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child {
+    border-bottom: none;
+}
+
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover {
+    color: rgb(0, 0, 40);
+}
+
+.title {
+    text-align: right;
+    display: inline-block;
+    font-size: 40px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    padding: 5px;
+    padding-left: 5px;
+    margin-left: 5px;
+}
+
+.welcome1 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.card {
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 40);
+    max-width: 300px;
+    background: white;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    position: relative;
+    top: 70px;
+}
+
+.price {
+    padding: 10px;
+    color: grey;
+    font-size: 22px;
+}
+
+.card button {
+    padding: 100px;
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+
+.welcome {
+    font-size: 25px;
+}
+
+.interface {
+    padding: 10px;
+}
+
+.title a {
+    text-decoration: none;
+    color: white;
+}
+
+.opennio {
+    text-decoration: none;
+    text-underline-position: none;
+    color: white;
+}
+
+
+/*card2*/
+
+.card2 {
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 40);
+    max-width: 300px;
+    background-color: white;
+    margin: auto;
+    text-align: center;
+    float: left;
+    font-family: arial;
+    position: relative;
+    top: -300px;
+    left: 12vw;
+}
+
+.price2 {
+    padding: 10px;
+    color: grey;
+    font-size: 22px;
+}
+
+.card button2 {
+    padding: 100px;
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.card button2:hover {
+    opacity: 0.7;
+}
+
+.welcome2 {
+    font-size: 25px;
+}
+
+.interface2 {
+    padding: 10px;
+}
+
+
+/*card3*/
+
+.card3 {
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 40);
+    max-width: 300px;
+    background-color: white;
+    margin: auto;
+    text-align: center;
+    float: left;
+    font-family: arial;
+    position: relative;
+    top: -296px;
+    left: 45vw;
+}
+
+.price3 {
+    padding: 10px;
+    color: grey;
+    font-size: 22px;
+}
+
+.welcome3 {
+    font-size: 25px;
+}
+
+.interface3 {
+    padding: 10px;
+}
